@@ -1,0 +1,1 @@
+start cmd.exe /k "python C:\Users\Pat\Desktop\DiscordPython-master\discord\bot3.py"
