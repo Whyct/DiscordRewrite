@@ -104,8 +104,10 @@ class MusicPlayer:
             channel = entry.channel
             requester = entry.requester
             self.guild.voice_client.play(entry, after=lambda s: self.bot.loop.call_soon_threadsafe(self.next.set))
-
-            self.now_playing = await channel.send(f'**Now Playing:** `{entry.title}` requested by `{requester}`')
+            embed = discord.Embed(title='Song Playing: ',color=discord.Color.blue())
+            embed.add_field(name='Song: ', value=entry.title)
+            embed.add_field(name='Requested by: ', value=requester)
+            self.now_playing = await channel.send("", embed=embed)
             await self.next.wait()  # Wait until the players after function is called.
             entry.cleanup()
 
