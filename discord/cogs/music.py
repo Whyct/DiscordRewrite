@@ -55,8 +55,11 @@ class YTDLSource(discord.PCMVolumeTransformer):
 
         if 'entries' in data:
             data = data['entries'][0]
+        embed = discord.Embed(title='Song Added: ')
+        embed.set_thumbnail(url="https://rurupucino.files.wordpress.com/2011/06/erii.png")
+        embed.add_field(name="", value=data["title"])
 
-        await entry.channel.send(f'```ini\n[Added: {data["title"]} to the queue.]\n```', delete_after=15)
+        await entry.channel.send(embed = embed,delete_after=20)
 
         filename = ytdl.prepare_filename(data)
         await player.queue.put(cls(discord.FFmpegPCMAudio(filename, **ffmpeg_options), data=data, entry=entry,
